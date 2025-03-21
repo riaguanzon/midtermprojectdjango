@@ -14,7 +14,6 @@ A simple Django-based Task Manager that allows users to create, read, update, de
 ```sh
 # Clone the repository
 git clone https://github.com/riaguanzon/midtermprojectdjango.git
-cd task_manager
 
 # Create a virtual environment and activate it
 pipenv shell

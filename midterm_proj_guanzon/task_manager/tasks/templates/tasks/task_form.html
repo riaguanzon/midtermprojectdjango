@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if task %}Edit{% else %}Create{% endif %} Task</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        /* Center Content */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Modern Card Design */
+        .card-custom {
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 1, 0.5);
+            border: 1px solid #ddd;
+            transition: transform 0.3s ease-in-out;
+        }
+
+
+        /* Styled Inputs */
+        .form-control {
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+
+        .form-control:focus {
+            border: 2px solid #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Buttons */
+        .btn-custom {
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-success:hover,
+        .btn-secondary:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-custom mx-auto" style="max-width: 500px;">
+            <h2 class="text-center  fw-bold mb-4">
+                {% if task %}Edit{% else %}Create{% endif %} Task
+            </h2>
+
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label fw-semibold">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" value="{{ task.title|default_if_none:'' }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-semibold">Description</label>
+                    <textarea id="description" name="description" class="form-control" rows="3">{{ task.description|default_if_none:'' }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="due_date" class="form-label fw-semibold">Due Date</label>
+                    <input type="date" id="due_date" name="due_date" class="form-control" value="{{ task.due_date|date:'Y-m-d' }}" required>
+                </div>
+                <div class="text-center mt-4 d-grid gap-2">
+                    <button type="submit" class="btn btn-success btn-lg btn-custom">
+                        {% if task %}Update{% else %}Create{% endif %} Task
+                    </button>
+                    <a href="{% url 'task_list' %}" class="btn btn-dark btn-lg btn-custom">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

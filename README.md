@@ -9,6 +9,11 @@ A simple Django-based Task Manager that allows users to create, read, update, de
 - Search tasks by title
 - Track task statuses (Upcoming, Due Today, Overdue)
 
+## Prerequisites
+- Python 3.x
+- Django 3.x
+- Git
+
 
 ## Setup
 ```sh
